@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+
+}
+.start-quiz{
+display:flex;
+flex-wrap: wrap;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border: dotted lightblue 12px;
+margin: 25px;
+background-color: yellow;
+padding: 25px;
+border-radius: 22px;
+}
+
+fieldset{
+    background-color: lightblue;
+    margin: 25px;
+    border: yellow double 33px;
+    border-radius: 22px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+fieldset:hover{
+    background-color: lightgray;
+}
+
+legend{
+    font-family: Edu VIC WA NT Beginner;
+    font-size: 32px;
+    text-align: center;
+    font-weight: bolder;
+    border: 8px double black;
+    background-color: lightblue;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    color: blue;
+    text-decoration: underline white dotted;
+}
+
+button{
+    display: flex;
+    flex-wrap: wrap;
+   width: fit-content;
+   font-size: 23px;
+  justify-content: center;
+}
