@@ -1,3 +1,136 @@
+
+var question = document.getElementById("question");
+var button = Array.from(document.getElementsByClassName("btn"));
+var startButton = document.getElementById("start-control");
+var answerIs = document.getElementById("answer-is");
+var questions = document.getElementById("questions");
+var timer = document.getElementById("timer");
+var startPage = document.getElementById("start-quiz");
+var endQuiz = document.getElementById("end-quiz")
+
+var currentQuestion = {};
+var acceptingQuestion = true;
+var score = 0;
+var questionCounter = 0;
+var availableQuestion = []
+var arrayOfQuestion = [
+    {
+        question: "What is function 1",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+            
+
+        ],
+    },
+    {
+        question: "What is function 2",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+        ]
+    },
+    {
+        question: "What is function 3",
+        answer:[
+           {text: "answer 1 is this", correct: true},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+        ]
+    },
+    {
+        question: "What is function 4",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+        ]
+    },
+    {
+        question: "What is function 5",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+        ]
+    },
+    {
+        question: "What is function 6",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+        ]
+    },
+    {
+        question: "What is function 7",
+        answer:[
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: true},
+           {text: "answer 1 is this", correct: false},
+           {text: "answer 1 is this", correct: false},
+        ]
+    }
+]
+
+startButton.addEventListener("click", function() {
+    var timeLeft = 3;
+    startPage.setAttribute("style", "display: none");
+    questions.setAttribute("style", "display: block");
+    
+  
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timer` to show the remaining seconds
+        timer.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timer.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timer` to an empty string
+        timer.textContent = "Time's up"
+        questions.setAttribute("style", "display: none");
+        endQuiz.setAttribute("style", "display: block");
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+      }
+    }, 1000);
+        
+});
+
+function startGame(){
+    questionCounter = 0;
+    score = 0; 
+    availableQuestion = [...arrayOfQuestion];
+    console.log(availableQuestion);
+    getNewQuestion();
+}
+function getNewQuestion() {
+    questionCounter++;
+    var indexquestion = Math.floor(Math.random() * availableQuestion.length);
+    currentQuestion = availableQuestion[indexquestion];
+    arrayOfQuestion.innerText = currentQuestion.arrayOfQuestion;
+
+}
+
+
+startButton.addEventListener('click', startGame)
+
+
+
 // 1. make a button in html
 // 2. create a timer
     //  a. make a timer function in javascript
@@ -7,25 +140,7 @@
     // make an global variable arrary of all questions in javascript
             // question is going to be an object
 // this is your question 
-//             var arrayOfQuestion = [
-//                 {
-//                     question: "What is function",
-//                     answer:[
-//                         "answer 1 is this",
-//                         "answer 2 is this",
-//                         "answer 3 is this"
-
-//                     ],
-//                     correctAnswer: 1
-//                 },
-//                 {
-//                     question: "What is function",
-//                     answer:[
-//                         "answer 1 is this",
-//                         "answer 2 is this",
-//                         "answer 3 is this"
-//                 }
-//             ]
+         
 // //  code for target something in nested in nexted structre of objects and arrays
 // var clickedAnswer = document.querySelector('[answer-choice="1"]')
 // // one way to use

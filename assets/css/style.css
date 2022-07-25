@@ -2,17 +2,24 @@
     margin: 0;
 
 }
-.start-quiz{
-display:flex;
-flex-wrap: wrap;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-border: dotted lightblue 12px;
-margin: 25px;
-background-color: yellow;
-padding: 25px;
-border-radius: 22px;
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#start-quiz{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: dotted lightblue 12px;
+    margin: 25px;
+    background-color: yellow;
+    padding: 25px;
+    border-radius: 22px;
+    text-decoration: underline;
 }
 
 fieldset{
@@ -55,7 +62,39 @@ h3{
 button{
     display: flex;
     flex-wrap: wrap;
-   width: fit-content;
-   font-size: 23px;
-  justify-content: center;
+    width: fit-content;
+    font-size: 23px;
+    justify-content: center;
 }
+ button:hover{
+    background-color: yellow;
+    border: dotted  4px lightblue;
+
+ }
+ #questions{
+    display: none;
+ }
+
+ .enter-initials{
+    display: flex;
+    flex-wrap: wrap;
+    border: black 3px solid;
+    font-size: 25px;
+    justify-content: center;
+    margin: 0 600px;
+    padding: 55px 0;
+    
+ }
+
+ .end-quiz{
+    display: flex;
+    flex-wrap: wrap;
+    border: black 3px solid;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 600px;
+ }
+
+ #end-quiz{
+    display: none;
+ }
