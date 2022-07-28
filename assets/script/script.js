@@ -1,12 +1,18 @@
 
 var question = document.getElementById("question");
-var button = Array.from(document.getElementsByClassName("btn"));
-var startButton = document.getElementById("start-control");
+var buttons = Array.from(document.getElementsByClassName("btn"))
+var start = document.getElementById("start-control");
 var answerIs = document.getElementById("answer-is");
-var questions = document.getElementById("questions");
+var questionGroup = document.getElementById("questions");
 var timer = document.getElementById("timer");
 var startPage = document.getElementById("start-quiz");
-var endQuiz = document.getElementById("end-quiz")
+var endQuiz = document.getElementById("end-quiz");
+var answerA = document.getElementById("A")
+var answerB = document.getElementById("B")
+var answerC = document.getElementById("C")
+var answerD = document.getElementById("D")
+
+
 
 var currentQuestion = {};
 var acceptingQuestion = true;
@@ -15,101 +21,121 @@ var questionCounter = 0;
 var availableQuestion = []
 var arrayOfQuestion = [
     {
-        question: "What is function 1",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-            
+        question: "Question  here",
+        buttonA: "A. Answer choice goes here", 
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer  goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "B"
+    },
+    {
+        question: "Question one will go",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "B"
+    },
+    {
+        question: " one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "D"
+    },
+    {
+        question: "Question one  go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "B"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "A"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "D"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "D"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "A"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "A"
+    },
+    {
+        question: "Question one will go here",
+        buttonA: "A. Answer choice goes here",
+        buttonB: "B. Answer Choice goes here",
+        buttonC: "C. Answer choice goes here",
+        buttonD: "D. Answer choice goes here",
+        answer: "D"
+    },
+   
+];
 
-        ],
-    },
-    {
-        question: "What is function 2",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-        ]
-    },
-    {
-        question: "What is function 3",
-        answer:[
-           {text: "answer 1 is this", correct: true},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-        ]
-    },
-    {
-        question: "What is function 4",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-        ]
-    },
-    {
-        question: "What is function 5",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-        ]
-    },
-    {
-        question: "What is function 6",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-        ]
-    },
-    {
-        question: "What is function 7",
-        answer:[
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: true},
-           {text: "answer 1 is this", correct: false},
-           {text: "answer 1 is this", correct: false},
-        ]
-    }
-]
+var correctQuestion = 10;
 
-startButton.addEventListener("click", function() {
-    var timeLeft = 3;
-    startPage.setAttribute("style", "display: none");
-    questions.setAttribute("style", "display: block");
+// startButton.addEventListener("click", function() {
+//     var timeLeft = 120;
+//     startPage.setAttribute("style", "display: none");
+//     questionGroup.setAttribute("style", "display: block");
+//     setQuestion();
     
   
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function () {
-      // As long as the `timeLeft` is greater than 1
-      if (timeLeft > 1) {
-        // Set the `textContent` of `timer` to show the remaining seconds
-        timer.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timer.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } else {
-        // Once `timeLeft` gets to 0, set `timer` to an empty string
-        timer.textContent = "Time's up"
-        questions.setAttribute("style", "display: none");
-        endQuiz.setAttribute("style", "display: block");
-        // Use `clearInterval()` to stop the timer
-        clearInterval(timeInterval);
-      }
-    }, 1000);
+//     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+//     var timeInterval = setInterval(function () {
+//       // As long as the `timeLeft` is greater than 1
+//       if (timeLeft > 1) {
+//         // Set the `textContent` of `timer` to show the remaining seconds
+//         timer.textContent = timeLeft + ' seconds remaining';
+//         // Decrement `timeLeft` by 1
+//         timeLeft--;
+//       } else if (timeLeft === 1) {
+//         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+//         timer.textContent = timeLeft + ' second remaining';
+//         timeLeft--;
+//       } else {
+//         // Once `timeLeft` gets to 0, set `timer` to an empty string
+//         timer.textContent = "Time's up"
+//         questions.setAttribute("style", "display: none");
+//         endQuiz.setAttribute("style", "display: block");
+//         // Use `clearInterval()` to stop the timer
+//         clearInterval(timeInterval);
+//       }
+//     }, 1000);
         
-});
+// });
+
 
 function startGame(){
     questionCounter = 0;
@@ -117,18 +143,29 @@ function startGame(){
     availableQuestion = [...arrayOfQuestion];
     console.log(availableQuestion);
     getNewQuestion();
-}
+};
 function getNewQuestion() {
     questionCounter++;
     var indexquestion = Math.floor(Math.random() * availableQuestion.length);
     currentQuestion = availableQuestion[indexquestion];
-    arrayOfQuestion.innerText = currentQuestion.arrayOfQuestion;
+    question.innerText = currentQuestion.question;
+    
+    buttons.forEach(button => {
+        var letter = button.dataset["letter"];
+        button.innerText = currentQuestion['button' + letter];
+    });
 
-}
+};
 
-
-startButton.addEventListener('click', startGame)
-
+// function displayQuestion(){
+//     question.innerText = arrayOfQuestion[questionCounter].question 
+//     answerA.innerText = arrayOfQuestion[questionCounter].buttonA
+//     answerB.innerText = arrayOfQuestion[questionCounter].buttonB
+//     answerC.innerText = arrayOfQuestion[questionCounter].buttonC
+//     answerD.innerText = arrayOfQuestion[questionCounter].buttonD
+// }
+// startButton.addEventListener('click', startGame)
+startGame() 
 
 
 // 1. make a button in html

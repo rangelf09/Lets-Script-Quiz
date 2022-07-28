@@ -70,10 +70,11 @@ button{
     background-color: yellow;
     border: dotted  4px lightblue;
 
- }
- #questions{
+  }
+
+ /* #questions{
     display: none;
- }
+ } */
 
  .enter-initials{
     display: flex;
