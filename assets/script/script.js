@@ -1,24 +1,30 @@
 
-var question = document.getElementById("question");
+var questions = document.getElementById("question");
 var buttons = Array.from(document.getElementsByClassName("btn"))
 var start = document.getElementById("start-control");
 var answerIs = document.getElementById("answer-is");
-var questionGroup = document.getElementById("questions");
+var questionGroup = document.getElementById("question-group");
 var timer = document.getElementById("timer");
 var startPage = document.getElementById("start-quiz");
 var endQuiz = document.getElementById("end-quiz");
-var answerA = document.getElementById("A")
-var answerB = document.getElementById("B")
-var answerC = document.getElementById("C")
-var answerD = document.getElementById("D")
 
+var timeLeft = 0;
 
-
+// this is where the current question will be and retrieved 
 var currentQuestion = {};
-var acceptingQuestion = true;
+
+// score will inccrease everytime a question is answered correctly
 var score = 0;
+
+var correctQuestion = 10;
+
+// question counter will increase everytime a new question is generated
 var questionCounter = 0;
+
+// This is where the array of questin will be logged in 
 var availableQuestion = []
+
+// This is the array of questions for be added 
 var arrayOfQuestion = [
     {
         question: "Question  here",
@@ -102,115 +108,74 @@ var arrayOfQuestion = [
     },
    
 ];
-
-var correctQuestion = 10;
-
-// startButton.addEventListener("click", function() {
-//     var timeLeft = 120;
-//     startPage.setAttribute("style", "display: none");
-//     questionGroup.setAttribute("style", "display: block");
-//     setQuestion();
+start.addEventListener("click", function(event) {
+    timeLeft = 123;
+    startPage.setAttribute("style", "display: none");
+    questionGroup.setAttribute("style", "display: block");
+    startGame();
     
-  
-//     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-//     var timeInterval = setInterval(function () {
-//       // As long as the `timeLeft` is greater than 1
-//       if (timeLeft > 1) {
-//         // Set the `textContent` of `timer` to show the remaining seconds
-//         timer.textContent = timeLeft + ' seconds remaining';
-//         // Decrement `timeLeft` by 1
-//         timeLeft--;
-//       } else if (timeLeft === 1) {
-//         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-//         timer.textContent = timeLeft + ' second remaining';
-//         timeLeft--;
-//       } else {
-//         // Once `timeLeft` gets to 0, set `timer` to an empty string
-//         timer.textContent = "Time's up"
-//         questions.setAttribute("style", "display: none");
-//         endQuiz.setAttribute("style", "display: block");
-//         // Use `clearInterval()` to stop the timer
-//         clearInterval(timeInterval);
-//       }
-//     }, 1000);
-        
-// });
-
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timer` to show the remaining seconds
+        timer.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timer.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timer` to an empty string
+        timer.textContent = "Time's up"
+        questionGroup.setAttribute("style", "display: none");
+        endQuiz.setAttribute("style", "display: block");
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+      }
+    }, 1000);
+});
 
 function startGame(){
-    questionCounter = 0;
-    score = 0; 
+    questionCounter ++;
+    score = 0;
     availableQuestion = [...arrayOfQuestion];
-    console.log(availableQuestion);
-    getNewQuestion();
-};
-function getNewQuestion() {
-    questionCounter++;
-    var indexquestion = Math.floor(Math.random() * availableQuestion.length);
-    currentQuestion = availableQuestion[indexquestion];
-    question.innerText = currentQuestion.question;
-    
-    buttons.forEach(button => {
-        var letter = button.dataset["letter"];
-        button.innerText = currentQuestion['button' + letter];
+    newQuestion();
+}
+
+function newQuestion(){
+    questionCounter = 0;
+    var indexQuestion = Math.floor(Math.random()* availableQuestion.length);
+    currentQuestion = availableQuestion[indexQuestion];
+    questions.textContent = currentQuestion.question;
+
+    buttons.forEach(function(button){
+     var letter = button.dataset["letter"];
+     button.textContent = currentQuestion["button" + letter];
     });
 
+    availableQuestion.splice(indexQuestion, 1);
+    console.log(availableQuestion);
 };
 
-// function displayQuestion(){
-//     question.innerText = arrayOfQuestion[questionCounter].question 
-//     answerA.innerText = arrayOfQuestion[questionCounter].buttonA
-//     answerB.innerText = arrayOfQuestion[questionCounter].buttonB
-//     answerC.innerText = arrayOfQuestion[questionCounter].buttonC
-//     answerD.innerText = arrayOfQuestion[questionCounter].buttonD
-// }
-// startButton.addEventListener('click', startGame)
-startGame() 
+buttons.forEach(function(button){
+    button.addEventListener('click', function(event){
+        event.preventDefault();
+        var choice = event.target;
+        var answerPick = choice.dataset["letter"];
 
+        var incorrect = 'incorrect';
+        if( answerPick !== currentQuestion.answer){
+          incorrect = timeLeft -= 5
+        } else {
+            incorrect = score += correctQuestion;
+        };
 
-// 1. make a button in html
-// 2. create a timer
-    //  a. make a timer function in javascript
-// 3. make an event listener - put it on the button /correct it to the buttton
-// 4. present/show a question in html
-    // maybe: hide question in html before ready
-    // make an global variable arrary of all questions in javascript
-            // question is going to be an object
-// this is your question 
-         
-// //  code for target something in nested in nexted structre of objects and arrays
-// var clickedAnswer = document.querySelector('[answer-choice="1"]')
-// // one way to use
-// arrayOfQuestion[0].answer[1] 
-// // another way to use
-// if ( clickedAnswer.getAttribute("answer-choice") == arrayOfQuestion[0].correctAnswer){
-//     // give them points
-// }
+        console.log(answerPick === currentQuestion.answer);
+        newQuestion();
+    });
 
-
-
-
-
-
-
-
-
-
-// // 1. when I answer a question
-// // 2. then I am presented with another question
-//     // 1a.making a button to click answer choices or make the answer choice a button
-//     // 2a. hide the previous or make the question container change textor remove the container element
-
-
-
-
-
-
-
-// // WHEN I answer a question incorrectly
-// // THEN  time is subtracted from the clock
-// // 1. if statement to check if the answer choice select is correct
-//     // if (wrong answer is clicked) {
-//         // do something with variable that keeps track of total time
-//         // time left timeleft = timeLeft - 1
-//     // }
+});
+console.log(score);
+startGame();

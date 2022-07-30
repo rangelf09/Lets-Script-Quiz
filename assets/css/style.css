@@ -72,9 +72,9 @@ button{
 
   }
 
- /* #questions{
+ #question-group{
     display: none;
- } */
+ }
 
  .enter-initials{
     display: flex;
