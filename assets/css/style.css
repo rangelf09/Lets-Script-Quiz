@@ -76,24 +76,29 @@ button{
     display: none;
  }
 
+#end-quiz{
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    bottom: 300px;
+    right: 143px;
+    width: 300px;
+    border: 5px solid #840808;
+    align-items: center;
+    justify-content: center;
+    margin: 0 600px;
+    padding: 165px;
+    background: rgb(13, 252, 13);
+    }
+
  .enter-initials{
     display: flex;
     flex-wrap: wrap;
-    border: black 3px solid;
     font-size: 25px;
     justify-content: center;
-    margin: 0 600px;
-    padding: 55px 0;
-    
- }
-
- .end-quiz{
-    display: flex;
-    flex-wrap: wrap;
-    border: black 3px solid;
     align-items: center;
-    justify-content: space-between;
-    margin: 0 600px;
+    padding: 55px 0;
+    width: max-content;
  }
 
  #end-quiz{

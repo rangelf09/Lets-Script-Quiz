@@ -7,7 +7,8 @@ var questionGroup = document.getElementById("question-group");
 var timer = document.getElementById("timer");
 var startPage = document.getElementById("start-quiz");
 var endQuiz = document.getElementById("end-quiz");
-
+var yourScore = document.getElementById("your-score");
+var highScore = document.getElementById("score-items");
 var timeLeft = 0;
 
 // this is where the current question will be and retrieved 
@@ -27,92 +28,50 @@ var availableQuestion = []
 // This is the array of questions for be added 
 var arrayOfQuestion = [
     {
-        question: "Question  here",
-        buttonA: "A. Answer choice goes here", 
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer  goes here",
-        buttonD: "D. Answer choice goes here",
+        question: "Inside which HTML element do we put the JavaScript?",
+        buttonA: "A. <javascript>", 
+        buttonB: "B. <script>",
+        buttonC: "C. <scripting>",
+        buttonD: "D. <js",
         answer: "B"
     },
     {
-        question: "Question one will go",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "B"
-    },
-    {
-        question: " one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "D"
-    },
-    {
-        question: "Question one  go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "B"
-    },
-    {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
+        question: "Where is the correct place to insert a JavaScript?",
+        buttonA: "A. The <body> section",
+        buttonB: "B. Both the <head> section and the <body> section are correct",
+        buttonC: "C. The <head> section",
+        buttonD: "D. Niether",
         answer: "A"
     },
     {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "D"
+        question: "How do you create a function in JavaScript?",
+        buttonA: "A. function:myFunction()",
+        buttonB: "B. function = myFunction()",
+        buttonC: "C. function myfunction()",
+        buttonD: "D. Neither",
+        answer: "C"
     },
     {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "D"
+        question: "How do you call a function named myFunction?",
+        buttonA: "A. call function myFunction()",
+        buttonB: "B. call myFunction()",
+        buttonC: "C. myFunction()",
+        buttonD: "D. ",
+        answer: "C"
     },
     {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
+        question: "How to write an IF statement in JavaScript?",
+        buttonA: "A. if == 5",
+        buttonB: "B. if i ==5 then",
+        buttonC: "C. if i = 5 then",
+        buttonD: "D. if(i==5)",
         answer: "A"
     },
-    {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "A"
-    },
-    {
-        question: "Question one will go here",
-        buttonA: "A. Answer choice goes here",
-        buttonB: "B. Answer Choice goes here",
-        buttonC: "C. Answer choice goes here",
-        buttonD: "D. Answer choice goes here",
-        answer: "D"
-    },
-   
 ];
 start.addEventListener("click", function(event) {
-    timeLeft = 123;
+    timeLeft = 120;
     startPage.setAttribute("style", "display: none");
     questionGroup.setAttribute("style", "display: block");
-    startGame();
     
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
@@ -138,14 +97,12 @@ start.addEventListener("click", function(event) {
 });
 
 function startGame(){
-    questionCounter ++;
     score = 0;
     availableQuestion = [...arrayOfQuestion];
     newQuestion();
-}
+} 
 
 function newQuestion(){
-    questionCounter = 0;
     var indexQuestion = Math.floor(Math.random()* availableQuestion.length);
     currentQuestion = availableQuestion[indexQuestion];
     questions.textContent = currentQuestion.question;
@@ -156,7 +113,14 @@ function newQuestion(){
     });
 
     availableQuestion.splice(indexQuestion, 1);
-    console.log(availableQuestion);
+    var allquestions = 'Done'
+    if (availableQuestion.length === 0){
+        questionGroup.setAttribute("style", "display: none");
+        endQuiz.setAttribute("style", "display: block");
+        allquestions = timeLeft -= 200;
+        
+    };
+
 };
 
 buttons.forEach(function(button){
@@ -168,13 +132,18 @@ buttons.forEach(function(button){
         var incorrect = 'incorrect';
         if( answerPick !== currentQuestion.answer){
           incorrect = timeLeft -= 5
+          answerIs.textContent = "Incorrect"
         } else {
             incorrect = score += correctQuestion;
+            answerIs.textContent = "Correct"
+           yourScore.textContent = "Your Score " + incorrect + ".";
         };
 
         console.log(answerPick === currentQuestion.answer);
         newQuestion();
     });
+
+
 
 });
 console.log(score);
